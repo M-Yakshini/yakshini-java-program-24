@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isNumber(String s) {
+        s = s.trim();
+        boolean n = false, d = false, e = false;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) n = true;
+            else if (c == '.') {
+                if (d || e) return false;
+                d = true;
+            } else if (c == 'e' || c == 'E') {
+                if (e || !n) return false;
+                e = true;
+                n = false;
+            } else if (c == '+' || c == '-') {
+                if (i != 0 && s.charAt(i - 1) != 'e' && s.charAt(i - 1) != 'E') return false;
+            } else return false;
+        }
+        return n;
+    }
+}
