@@ -1,0 +1,34 @@
+class Solution {
+    public List<String> fullJustify(String[] w, int m) {
+        List<String> r = new ArrayList<>();
+        int i = 0;
+        while (i < w.length) {
+            int j = i, l = 0;
+            while (j < w.length && l + w[j].length() + j - i <= m) {
+                l += w[j].length();
+                j++;
+            }
+            int sp = m - l;
+            StringBuilder sb = new StringBuilder();
+            if (j == w.length || j - i == 1) {
+                for (int k = i; k < j; k++) {
+                    sb.append(w[k]);
+                    if (k < j - 1) sb.append(" ");
+                }
+                while (sb.length() < m) sb.append(" ");
+            } else {
+                int s = sp / (j - i - 1);
+                int ex = sp % (j - i - 1);
+                for (int k = i; k < j; k++) {
+                    sb.append(w[k]);
+                    if (k < j - 1) {
+                        for (int x = 0; x < s + (ex-- > 0 ? 1 : 0); x++) sb.append(" ");
+                    }
+                }
+            }
+            r.add(sb.toString());
+            i = j;
+        }
+        return r;
+    }
+}
