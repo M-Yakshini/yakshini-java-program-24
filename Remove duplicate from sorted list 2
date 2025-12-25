@@ -1,0 +1,15 @@
+class Solution {
+    public ListNode deleteDuplicates(ListNode h) {
+        ListNode d = new ListNode(0);
+        d.next = h;
+        ListNode p = d;
+        while (h != null) {
+            if (h.next != null && h.val == h.next.val) {
+                while (h.next != null && h.val == h.next.val) h = h.next;
+                p.next = h.next;
+            } else p = p.next;
+            h = h.next;
+        }
+        return d.next;
+    }
+}
