@@ -1,0 +1,10 @@
+class Solution {
+    Long p = null;
+    public boolean isValidBST(TreeNode r) {
+        if (r == null) return true;
+        if (!isValidBST(r.left)) return false;
+        if (p != null && r.val <= p) return false;
+        p = (long) r.val;
+        return isValidBST(r.right);
+    }
+}
