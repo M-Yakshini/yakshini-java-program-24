@@ -1,0 +1,15 @@
+class Solution {
+    public int numDecodings(String s) {
+        if (s.length() == 0 || s.charAt(0) == '0') return 0;
+        int a = 1, b = 1;
+        for (int i = 1; i < s.length(); i++) {
+            int c = 0;
+            if (s.charAt(i) != '0') c = b;
+            int n = Integer.parseInt(s.substring(i - 1, i + 1));
+            if (n >= 10 && n <= 26) c += a;
+            a = b;
+            b = c;
+        }
+        return b;
+    }
+}
