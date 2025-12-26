@@ -1,0 +1,16 @@
+class Solution {
+    TreeNode a, b, p;
+    public void recoverTree(TreeNode r) {
+        if (r == null) return;
+        recoverTree(r.left);
+        if (p != null && r.val < p.val) {
+            if (a == null) a = p;
+            b = r;
+        }
+        p = r;
+        recoverTree(r.right);
+        int t = a.val;
+        a.val = b.val;
+        b.val = t;
+    }
+}
