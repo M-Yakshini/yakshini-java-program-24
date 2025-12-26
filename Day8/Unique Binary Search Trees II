@@ -1,0 +1,23 @@
+class Solution {
+    public List<TreeNode> generateTrees(int n) {
+        if (n == 0) return new ArrayList<>();
+        return gen(1, n);
+    }
+    List<TreeNode> gen(int l, int r) {
+        List<TreeNode> a = new ArrayList<>();
+        if (l > r) {
+            a.add(null);
+            return a;
+        }
+        for (int i = l; i <= r; i++) {
+            for (TreeNode x : gen(l, i - 1))
+                for (TreeNode y : gen(i + 1, r)) {
+                    TreeNode t = new TreeNode(i);
+                    t.left = x;
+                    t.right = y;
+                    a.add(t);
+                }
+        }
+        return a;
+    }
+}
