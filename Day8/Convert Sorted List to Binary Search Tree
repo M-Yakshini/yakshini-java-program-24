@@ -1,0 +1,17 @@
+class Solution {
+    public TreeNode sortedListToBST(ListNode h) {
+        if (h == null) return null;
+        if (h.next == null) return new TreeNode(h.val);
+        ListNode s = h, f = h, p = null;
+        while (f != null && f.next != null) {
+            p = s;
+            s = s.next;
+            f = f.next.next;
+        }
+        p.next = null;
+        TreeNode t = new TreeNode(s.val);
+        t.left = sortedListToBST(h);
+        t.right = sortedListToBST(s.next);
+        return t;
+    }
+}
