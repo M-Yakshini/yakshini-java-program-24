@@ -1,0 +1,15 @@
+class Solution {
+    int i = 0;
+    Map<Integer, Integer> m = new HashMap<>();
+    public TreeNode buildTree(int[] p, int[] in) {
+        for (int j = 0; j < in.length; j++) m.put(in[j], j);
+        return f(p, 0, in.length - 1);
+    }
+    TreeNode f(int[] p, int l, int r) {
+        if (l > r) return null;
+        TreeNode t = new TreeNode(p[i++]);
+        t.left = f(p, l, m.get(t.val) - 1);
+        t.right = f(p, m.get(t.val) + 1, r);
+        return t;
+    }
+}
