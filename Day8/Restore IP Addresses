@@ -1,0 +1,19 @@
+class Solution {
+    List<String> r = new ArrayList<>();
+    public List<String> restoreIpAddresses(String s) {
+        dfs(s, 0, 0, "");
+        return r;
+    }
+    void dfs(String s, int i, int p, String cur) {
+        if (p == 4 && i == s.length()) {
+            r.add(cur.substring(0, cur.length() - 1));
+            return;
+        }
+        if (p == 4 || i == s.length()) return;
+        for (int l = 1; l <= 3 && i + l <= s.length(); l++) {
+            String t = s.substring(i, i + l);
+            if ((t.startsWith("0") && t.length() > 1) || Integer.parseInt(t) > 255) continue;
+            dfs(s, i + l, p + 1, cur + t + ".");
+        }
+    }
+}
